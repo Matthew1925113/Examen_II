@@ -19,9 +19,9 @@ Public Class Login
 
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs)
         Dim cliente As New Cliente() With {
-    .Email = txtEmail.Text,
-    .Contrasena = txtPass.Text
-}
+            .Email = txtEmail.Text,
+            .Contrasena = txtPass.Text
+        }
 
         If VerificarCredenciales(cliente) Then
             Response.Redirect("Clientes.aspx")

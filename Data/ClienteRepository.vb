@@ -1,9 +1,10 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ClienteRepository
-    Dim connectionString As String = New DataBaseHelper().ConnectionString
+
 
     Public Function GetClientes() As List(Of Cliente)
+        Dim connectionString As String = New DataBaseHelper()._connectionString
         Dim clientes As New List(Of Cliente)()
         Using connection As New SqlConnection(connectionString)
             connection.Open()
@@ -24,6 +25,7 @@ Public Class ClienteRepository
     End Function
 
     Public Sub InsertarCliente(cliente As Cliente)
+        Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
             Dim command As New SqlCommand("INSERT INTO Clientes (Nombre, Email, Telefono) VALUES (@Nombre, @Email, @Telefono)", connection)
@@ -35,6 +37,7 @@ Public Class ClienteRepository
     End Sub
 
     Public Sub ActualizarCliente(cliente As Cliente)
+        Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
             Dim command As New SqlCommand("UPDATE Clientes SET Nombre = @Nombre, Email = @Email, Telefono = @Telefono WHERE IdCliente = @IdCliente", connection)
@@ -47,6 +50,7 @@ Public Class ClienteRepository
     End Sub
 
     Public Sub EliminarCliente(idCliente As Integer)
+        Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
             Dim command As New SqlCommand("DELETE FROM Clientes WHERE IdCliente = @IdCliente", connection)
@@ -55,7 +59,8 @@ Public Class ClienteRepository
         End Using
     End Sub
 
-    Public Function VerificarCredenciales(cliente As Cliente) As Boolean
+    Public Function VerificarCredenciales(cliente As Cliente)
+        Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
             Dim command As New SqlCommand("SELECT  Email,Contrasena  FROM Clientes WHERE Email = @Email AND Contrasena = @Contrasena", connection)
