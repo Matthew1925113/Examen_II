@@ -2,62 +2,63 @@
 
 Public Class ClienteRepository
 
-
-    Public Function GetClientes() As List(Of Cliente)
+    Public Sub New()
+        ' Constructor vacío
+    End Sub
+    Public Function GetClientes() As DataTable
+        Dim dt As New DataTable()
         Dim connectionString As String = New DataBaseHelper()._connectionString
-        Dim clientes As New List(Of Cliente)()
         Using connection As New SqlConnection(connectionString)
             connection.Open()
             Dim command As New SqlCommand("SELECT * FROM Clientes", connection)
             Using reader As SqlDataReader = command.ExecuteReader()
-                While reader.Read()
-                    Dim cliente As New Cliente()
-                    cliente.IdCliente = reader("ClienteId")
-                    cliente.Nombre = reader("Nombre")
-                    cliente.Email = reader("Email")
-                    cliente.Telefono = reader("Telefono")
-                    cliente.Contrasena = reader("Contrasena")
-                    clientes.Add(cliente)
-                End While
+                dt.Load(reader)
             End Using
         End Using
-        Return clientes
+        Return dt
     End Function
 
-    Public Sub InsertarCliente(cliente As Cliente)
+    Public Function InsertarCliente(cliente As Cliente) As String
         Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
-            Dim command As New SqlCommand("INSERT INTO Clientes (Nombre, Email, Telefono) VALUES (@Nombre, @Email, @Telefono)", connection)
+            Dim command As New SqlCommand("INSERT INTO Clientes (Nombre, Apellidos, Email, Telefono, Contrasena) VALUES (@Nombre, @Apellidos, @Email, @Telefono, @Contrasena)", connection)
             command.Parameters.AddWithValue("@Nombre", cliente.Nombre)
+            command.Parameters.AddWithValue("@Apellidos", cliente.Apellidos)
             command.Parameters.AddWithValue("@Email", cliente.Email)
             command.Parameters.AddWithValue("@Telefono", cliente.Telefono)
+            command.Parameters.AddWithValue("@Contrasena", cliente.Contrasena)
             command.ExecuteNonQuery()
         End Using
-    End Sub
+        Return "Cliente insertado correctamente."
+    End Function
 
-    Public Sub ActualizarCliente(cliente As Cliente)
+    Public Function ActualizarCliente(id As String, cliente As Cliente) As String
         Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
-            Dim command As New SqlCommand("UPDATE Clientes SET Nombre = @Nombre, Email = @Email, Telefono = @Telefono WHERE IdCliente = @IdCliente", connection)
-            command.Parameters.AddWithValue("@IdCliente", cliente.IdCliente)
+            Dim command As New SqlCommand("UPDATE Clientes SET Nombre = @Nombre, Apellidos = @Apelidos,Email = @Email, Telefono = @Telefono, Contrasena = @Contrasena WHERE ClienteId = @ClienteId", connection)
+            command.Parameters.AddWithValue("@ClienteId", id)
             command.Parameters.AddWithValue("@Nombre", cliente.Nombre)
+            command.Parameters.AddWithValue("@Apelidos", cliente.Apellidos)
             command.Parameters.AddWithValue("@Email", cliente.Email)
             command.Parameters.AddWithValue("@Telefono", cliente.Telefono)
+            command.Parameters.AddWithValue("@Contrasena", cliente.Contrasena)
             command.ExecuteNonQuery()
         End Using
-    End Sub
+        Return "Cliente actualizado correctamente."
+    End Function
 
-    Public Sub EliminarCliente(idCliente As Integer)
+    Public Function EliminarCliente(idCliente As Integer) As String
         Dim connectionString As String = New DataBaseHelper()._connectionString
         Using connection As New SqlConnection(connectionString)
             connection.Open()
-            Dim command As New SqlCommand("DELETE FROM Clientes WHERE IdCliente = @IdCliente", connection)
+            Dim command As New SqlCommand("DELETE FROM Clientes WHERE ClienteId = @IdCliente", connection)
             command.Parameters.AddWithValue("@IdCliente", idCliente)
             command.ExecuteNonQuery()
         End Using
-    End Sub
+        Return "Cliente eliminado correctamente."
+    End Function
 
     Public Function VerificarCredenciales(cliente As Cliente)
         Dim connectionString As String = New DataBaseHelper()._connectionString

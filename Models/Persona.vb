@@ -1,10 +1,12 @@
 ﻿Public Class Persona
     Protected _nombre As String
+    Protected _apellidos As String
     Protected _email As String
     Protected _telefono As String
 
     Public Sub New()
         _nombre = String.Empty
+        _apellidos = String.Empty
         _email = String.Empty
         _telefono = String.Empty
     End Sub
@@ -15,6 +17,14 @@
         End Get
         Set(value As String)
             _nombre = value
+        End Set
+    End Property
+    Public Property Apellidos As String
+        Get
+            Return _apellidos
+        End Get
+        Set(value As String)
+            _apellidos = value
         End Set
     End Property
 

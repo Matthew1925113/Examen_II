@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Clientes
 
     '''<summary>
+    '''Control IDCliente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents IDCliente As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''Control TxtNombre.
     '''</summary>
     '''<remarks>
@@ -50,6 +59,24 @@ Partial Public Class Clientes
     Protected WithEvents txtTelefono As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control txtPass.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPass As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control RequiredFieldValidatorPass.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidatorPass As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Control btnGuardar.
     '''</summary>
     '''<remarks>
@@ -75,4 +102,13 @@ Partial Public Class Clientes
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control grvDatos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents grvDatos As Global.System.Web.UI.WebControls.GridView
 End Class

@@ -1,15 +1,16 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Clientes.aspx.vb" Inherits="Examen_II.Clientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:HiddenField ID="IDCliente" runat="server" />
     <div class="row mb-3">
         <div class="col-md-4">
 
             <div class="form-group mb-3">
-                <label for="TxtNombre">Nombre</label>
+                <label for="txtNombre">Nombre</label>
                 <asp:TextBox ID="TxtNombre" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             
             <div class="form-group mb-3">
-                <label for="TxtApellido">Apellidos</label>
+                <label for="txtApellido">Apellidos</label>
                 <asp:TextBox ID="TxtApellidos" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
 
@@ -23,6 +24,16 @@
                 <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
 
+            <div class="form-group mb-3">
+              <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password"></asp:TextBox>
+                    <label for="MainContent_txtPass">Password</label>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass"
+                        ControlToValidate="txtPass"
+                        Display="Dynamic"
+                        ErrorMessage="La contraseña es requerida"
+                        runat="server" />
+            </div>
+
             <div class="form-group">
                 <asp:Button ID="btnGuardar" CssClass="btn btn-primary" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
             </div>
@@ -33,6 +44,16 @@
         </div>
     </div>
     
-        <asp:Label ID="lblError" runat="server" Text="" CssClass="error"></asp:Label>
+    <asp:Label ID="lblError" runat="server" Text="" CssClass="error"></asp:Label>
+
+    <asp:GridView ID="grvDatos" runat="server" 
+        OnSelectedIndexChanged ="grvDatos_SelectedIndexChanged"
+        OnRowDeleting ="grvDatos_RowDeleting" 
+        DataKeyNames ="ClienteID">
+        <Columns>
+            <asp:CommandField ShowSelectButton="True" />
+            <asp:CommandField ShowDeleteButton="True" />
+        </Columns>
+    </asp:GridView>
 
 </asp:Content>
